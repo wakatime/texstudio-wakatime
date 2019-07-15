@@ -9,6 +9,7 @@
 
 
 import os
+import glob
 import json
 import platform
 import sys
@@ -26,9 +27,9 @@ PY2 = (sys.version_info[0] == 2)
 ROOT_URL = 'https://raw.githubusercontent.com/wakatime/texstudio-wakatime/master/src/'
 SRC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src')
 if platform.system() == 'Windows':
-    CONFIG_DIR = os.path.join(os.getenv('APPDATA'), 'texstudio')
+    CONFIG_DIR = os.path.join(os.getenv('APPDATA'), 'texstudio', 'macro')
 else:
-    CONFIG_DIR = os.path.join(os.path.expanduser('~'), '.config', 'texstudio')
+    CONFIG_DIR = os.path.join(os.path.expanduser('~'), '.config', 'texstudio', 'macro')
 FILES = [
     'utils.js',
     'main.js',
@@ -42,82 +43,59 @@ if PY2:
 
 
 def main():
-    configs = parse_ini_file()
     macro = build_macro()
-    configs = add_macro(configs, macro)
-    save_ini_file(configs)
+    save_macro_file(macro)
     print('Installed. You may now run TeXstudio.')
     if platform.system() == 'Windows':
         input('Press [Enter] to exit...')
 
 
 def build_macro():
-    """Build the contents that gets added to your texstudio.ini file."""
+    """Build the contents that adds wakatime.txsMacro file."""
 
-    script = '%SCRIPT'
+    script = {
+        "abbrev": '',
+        "description": 'TeXstudio macro for automatic time tracking and metrics generated from your TeXstudio usage.',
+        "formatVersion": 1,
+        "menu": '',
+        "name": 'WakaTime',
+        "shortcut": '',
+        "trigger": '?txs-start|?save-file'
+    }
+
+    script['tag'] = []
+    script['tag'].append('%SCRIPT')
     for filename in FILES:
-        contents = get_file_contents(filename)
-        if not contents:
-            return
-        script += '\n' + contents
-    script = json.dumps(script)
-    macro = 'WakaTime, {script}, , ?txs-start|?save-file'.format(
-        script=script,
-    )
-    return macro
+        path = get_file_path(filename)
+        with open(path) as f:
+            line = f.readline()
+            while line:
+                line = line.replace('\n', '').strip()
+                script['tag'].append(line)
+                line = f.readline()
+    return script
 
 
-def get_file_contents(filename):
+def get_file_path(filename):
     """Get file contents from local clone or GitHub repo."""
 
     if os.path.exists(os.path.join(SRC_DIR, filename)):
-        with open(os.path.join(SRC_DIR, filename)) as fh:
-            return fh.read()
+        return os.path.join(SRC_DIR, filename)
     else:
-        url = ROOT_URL + filename
-        resp = urlopen(url)
-        return resp.read()
+        return ROOT_URL + filename
 
 
-def parse_ini_file():
-    """Parses your texstudio.ini config file and returns a ConfigParser obj."""
+def save_macro_file(macro):
+    """Writes wakatime.txsMacro file."""
 
-    iniFile = os.path.join(CONFIG_DIR, 'texstudio.ini')
+    os.chdir(CONFIG_DIR)
+    total_files = len(glob.glob1(CONFIG_DIR, 'Macro_*.txsMacro'))
+    print('Found {} file(s) from macro folder.'.format(total_files))
 
-    configs = configparser.RawConfigParser()
-    configs.optionxform = str  # preserve case in key names
-    with open(iniFile, 'r', encoding='utf-8') as fh:
-        configs.readfp(fh)
-    return configs
+    macroFile = os.path.join(CONFIG_DIR, 'Macro_{}.txsMacro'.format(total_files))
 
-
-def add_macro(configs, macro):
-    """Adds the given macro to a ConfigParser texstudio.ini file."""
-
-    section = 'texmaker'
-    key = 'Macros\\{0}'
-
-    # find next available macro index
-    index = 0
-    while configs.has_option(section, key.format(index)):
-        val = configs.get(section, key.format(index))
-        if val.split(',')[0].strip() == 'WakaTime':
-            break
-        index += 1
-
-    # add macro to config at given index
-    configs.set(section, key.format(index), macro)
-
-    return configs
-
-
-def save_ini_file(configs):
-    """Writes a ConfigParser obj to your texstudio.ini config file."""
-
-    iniFile = os.path.join(CONFIG_DIR, 'texstudio.ini')
-
-    with open(iniFile, 'w', encoding='utf-8') as fh:
-        configs.write(fh)
+    with open(macroFile, 'w', encoding='utf-8') as fh:
+        json.dump(macro, fh)
 
 
 if __name__ == '__main__':
