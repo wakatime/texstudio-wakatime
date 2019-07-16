@@ -13,14 +13,6 @@ import glob
 import json
 import platform
 import sys
-try:
-    import ConfigParser as configparser
-except ImportError:
-    import configparser
-try:
-    from urllib2 import urlopen
-except ImportError:
-    from urllib.request import urlopen
 
 
 PY2 = (sys.version_info[0] == 2)
@@ -70,7 +62,7 @@ def build_macro():
         with open(path) as f:
             line = f.readline()
             while line:
-                line = line.replace('\n', '').strip()
+                line = line.rstrip()
                 script['tag'].append(line)
                 line = f.readline()
     return script
@@ -86,7 +78,7 @@ def get_file_path(filename):
 
 
 def save_macro_file(macro):
-    """Writes wakatime.txsMacro file."""
+    """Writes Macro_X.txsMacro file."""
 
     os.chdir(CONFIG_DIR)
     total_files = len(glob.glob1(CONFIG_DIR, 'Macro_*.txsMacro'))
@@ -95,7 +87,7 @@ def save_macro_file(macro):
     macroFile = os.path.join(CONFIG_DIR, 'Macro_{}.txsMacro'.format(total_files))
 
     with open(macroFile, 'w', encoding='utf-8') as fh:
-        json.dump(macro, fh)
+        json.dump(macro, fh, sort_keys=True, indent=2)
 
 
 if __name__ == '__main__':
