@@ -91,6 +91,7 @@ def find_macro_file():
         macroFile = os.path.join(CONFIG_DIR, filename)
         if not os.path.exists(macroFile):
             print('Installing WakaTime macro {}.'.format(macroFile))
+            os.makedirs(CONFIG_DIR)
             return macroFile
         with open(macroFile, 'r', encoding='utf-8') as fh:
             macro = json.load(fh)

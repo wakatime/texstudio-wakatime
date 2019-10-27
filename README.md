@@ -18,6 +18,8 @@ Installation
 
 3. Run `install.py`
 
+  ```Be sure to have python 2.7 installed```
+
   **Mac and Linux**
 
   `curl -fsSL https://raw.githubusercontent.com/wakatime/texstudio-wakatime/master/install.py | python`
