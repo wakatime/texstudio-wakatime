@@ -62,7 +62,7 @@ def build_macro():
     script['tag'] = []
     script['tag'].append('%SCRIPT')
     for filename in FILES:
-        contents = get_file_contents(filename)
+        contents = get_file_contents(filename).decode('utf-8')
         if not contents:
             continue
         for line in contents.splitlines():

@@ -1,11 +1,7 @@
 
 var VERSION = '1.0.0';
 var EDITOR_VERSION = app.getVersion();
-var FREQUENCY = 2;
 
-var LAST_FILE = '';
-var LAST_TIME = null;
-var WAKATIME_CLI = null; // defined in event handler scope
 var TRIGGERS = {
   2: '?txs-start',
   64: '?save-file',
