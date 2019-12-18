@@ -62,7 +62,7 @@ def build_macro():
     script['tag'] = []
     script['tag'].append('%SCRIPT')
     for filename in FILES:
-        contents = get_file_contents(filename).decode('utf-8')
+        contents = get_file_contents(filename)
         if not contents:
             continue
         for line in contents.splitlines():
@@ -79,7 +79,7 @@ def get_file_contents(filename):
     else:
         url = ROOT_URL + filename
         resp = urlopen(url)
-        return resp.read()
+        return resp.read() if PY2 else resp.read.decode('utf-8')
 
 
 def find_macro_file():
