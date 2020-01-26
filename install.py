@@ -86,12 +86,13 @@ def find_macro_file():
     """Returns path of existing installed macro or an unused macro number file."""
 
     number = 0
+    if not os.path.exists(CONFIG_DIR):
+        os.makedirs(CONFIG_DIR)
     while True:
         filename = 'Macro_{}.txsMacro'.format(number)
         macroFile = os.path.join(CONFIG_DIR, filename)
         if not os.path.exists(macroFile):
             print('Installing WakaTime macro {}.'.format(macroFile))
-            os.makedirs(CONFIG_DIR)
             return macroFile
         with open(macroFile, 'r', encoding='utf-8') as fh:
             macro = json.load(fh)
