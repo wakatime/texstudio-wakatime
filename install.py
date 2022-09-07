@@ -79,7 +79,7 @@ def get_file_contents(filename):
     else:
         url = ROOT_URL + filename
         resp = urlopen(url)
-        return resp.read() if PY2 else resp.read.decode('utf-8')
+        return resp.read() if PY2 else resp.read().decode('utf-8')
 
 
 def find_macro_file():
