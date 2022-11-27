@@ -9,7 +9,7 @@ Installation
 
 1. Install [wakatime-cli](https://github.com/wakatime/wakatime-cli):
 
-    `curl -fsSL https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py | python`
+        curl -fsSL https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py | python
 
     If the above command doesn't work, download [install_cli.py](https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py) and run it manually with Python 3.
 
@@ -26,7 +26,7 @@ Installation
 
     **Mac and Linux**
 
-    `curl -fsSL https://raw.githubusercontent.com/wakatime/texstudio-wakatime/master/install.py | python`
+        curl -fsSL https://raw.githubusercontent.com/wakatime/texstudio-wakatime/master/install.py | python
 
     **Windows**
 
