@@ -3,7 +3,7 @@ History
 -------
 
 
-1.0.1 (2022-11-27)
+2.0.0 (2022-11-27)
 ++++++++++++++++++
 
 - Support api key with waka prefix.
