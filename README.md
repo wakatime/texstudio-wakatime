@@ -7,18 +7,22 @@ Metrics, insights, and time tracking automatically generated from your TeXstudio
 Installation
 ------------
 
-1. Install the [wakatime](https://github.com/wakatime/wakatime#installation) python command line tool.
+1. Install [wakatime-cli](https://github.com/wakatime/wakatime-cli):
+
+        python3 -c "$(wget -q -O - https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py)"
+
+    If the above command doesn't work, download [install_cli.py](https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py) and run it manually with Python.
+
+    Or, find the [wakatime-cli release asset](https://github.com/wakatime/wakatime-cli/releases) corresponding to your platform, extract it to `~/.wakatime/` then create a symlink from `~/.wakatime/wakatime-cli` to the platform specific build in that same folder.
 
 2. Create a `~/.wakatime.cfg` file with contents:
 
         [settings]
         api_key = XXXX
-    
+
   Replace `XXXX` with your actual [api key](https://wakatime.com/settings#apikey).
 
 3. Run `install.py`
-
-  ```Be sure to have python 2.7 installed```
 
   **Mac and Linux**
 
@@ -42,8 +46,8 @@ Screen Shots
 Troubleshooting
 ---------------
 
-Do you have [Python](https://www.python.org/downloads/) installed?
+Do you have [wakatime](https://github.com/wakatime/wakatime-cli) installed at `~/.wakatime/wakatime-cli`?
 
-Do you have [wakatime](https://github.com/wakatime/wakatime#installation) installed and available in your PATH?
+Any error messages in your `~/.wakatime.log` file?
 
-For more general troubleshooting information, see [wakatime/wakatime#troubleshooting](https://github.com/wakatime/wakatime#troubleshooting).
+For more general troubleshooting information, see [wakatime-cli troubleshooting](https://github.com/wakatime/wakatime-cli/blob/develop/TROUBLESHOOTING.md#readme).
