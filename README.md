@@ -9,9 +9,9 @@ Installation
 
 1. Install [wakatime-cli](https://github.com/wakatime/wakatime-cli):
 
-        python3 -c "$(wget -q -O - https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py)"
+        curl -fsSL https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py | python
 
-    If the above command doesn't work, download [install_cli.py](https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py) and run it manually with Python.
+    If the above command doesn't work, download [install_cli.py](https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py) and run it manually with Python 3.
 
     Or, find the [wakatime-cli release asset](https://github.com/wakatime/wakatime-cli/releases) corresponding to your platform, extract it to `~/.wakatime/` then create a symlink from `~/.wakatime/wakatime-cli` to the platform specific build in that same folder.
 
