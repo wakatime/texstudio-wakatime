@@ -1,5 +1,5 @@
 
-var VERSION = '1.0.0';
+var VERSION = '2.0.0';
 var EDITOR_VERSION = app.getVersion();
 
 var TRIGGERS = {
