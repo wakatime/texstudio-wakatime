@@ -3,6 +3,13 @@ History
 -------
 
 
+2.0.1 (2023-02-14)
+++++++++++++++++++
+
+- Fix path to wakatime-cli in $HOME folder.
+  `#1 <https://github.com/wakatime/texstudio-wakatime/issues/1>`_
+
+
 2.0.0 (2022-11-27)
 ++++++++++++++++++
 
