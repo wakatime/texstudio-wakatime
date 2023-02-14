@@ -26,7 +26,7 @@ function sendHeartbeat(file, isWrite) {
   file = utils.urlToPath(file);
 
   var args = [
-    '~/.wakatime/wakatime-cli',
+    '$HOME/.wakatime/wakatime-cli',
     '--entity',
     '"' + file + '"',
     '--plugin',
