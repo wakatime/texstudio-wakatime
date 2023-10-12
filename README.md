@@ -48,6 +48,6 @@ Troubleshooting
 
 Do you have [wakatime](https://github.com/wakatime/wakatime-cli) installed at `~/.wakatime/wakatime-cli`?
 
-Any error messages in your `~/.wakatime.log` file?
+Any error messages in your `~/.wakatime/wakatime.log` file?
 
 For more general troubleshooting information, see [wakatime-cli troubleshooting](https://github.com/wakatime/wakatime-cli/blob/develop/TROUBLESHOOTING.md#readme).
