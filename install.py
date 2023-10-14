@@ -12,6 +12,8 @@ import os
 import json
 import platform
 import sys
+import platform
+import os
 try:
     from urllib2 import urlopen
 except ImportError:
@@ -62,7 +64,23 @@ def build_macro():
     script['tag'] = []
     script['tag'].append('%SCRIPT')
     for filename in FILES:
-        contents = get_file_contents(filename)
+        if platform.system() == 'Windows':
+            if filename == 'main.js':
+                path = 'C:/Users/'
+                cli_filename = 'wakatime-cli-windows-amd64.exe'
+                result = []
+                for root, lists, files in os.walk(path):
+                    for file in files:
+                        if cli_filename in file and ".wakatime" in os.path.join(root, file):
+                            write = os.path.join(root, file)
+                            result.append(write)
+                wakatime_cli_location = result[0]
+                contents = get_file_contents(filename)
+                contents = contents.replace('$HOME/.wakatime/wakatime-cli', wakatime_cli_location.replace(os.sep,"/"))
+            else:
+                contents = get_file_contents(filename)
+        else:
+            contents = get_file_contents(filename)
         if not contents:
             continue
         for line in contents.splitlines():
