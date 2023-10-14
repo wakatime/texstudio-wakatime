@@ -12,7 +12,6 @@ import os
 import json
 import platform
 import sys
-import platform
 import os
 try:
     from urllib2 import urlopen
