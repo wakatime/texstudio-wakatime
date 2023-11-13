@@ -1,6 +1,7 @@
 
 var VERSION = '2.0.1';
 var EDITOR_VERSION = app.getVersion();
+var IS_WIN = false;
 
 var TRIGGERS = {
   2: '?txs-start',
@@ -10,6 +11,9 @@ var TRIGGERS = {
 
 function initialize() {
   debug('Initializing WakaTime v' + VERSION + '...');
+  var proc = system('ver');
+  proc.waitForFinished();
+  if (proc.exitCode === 0) IS_WIN = true;
 }
 
 function onSave() {
@@ -25,8 +29,11 @@ function sendHeartbeat(file, isWrite) {
 
   file = utils.urlToPath(file);
 
+  var cli = '$HOME/.wakatime/wakatime-cli';
+  if (IS_WIN) cli = '%USERPROFILE%/.wakatime/wakatime-cli.exe';
+
   var args = [
-    '$HOME/.wakatime/wakatime-cli',
+    cli,
     '--entity',
     '"' + file + '"',
     '--plugin',

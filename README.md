@@ -13,8 +13,6 @@ Installation
 
     If the above command doesn't work, download [install_cli.py](https://raw.githubusercontent.com/wakatime/vim-wakatime/master/scripts/install_cli.py) and run it manually with Python 3.
 
-    Or, find the [wakatime-cli release asset](https://github.com/wakatime/wakatime-cli/releases) corresponding to your platform, extract it to `~/.wakatime/` then create a symlink from `~/.wakatime/wakatime-cli` to the platform specific build in that same folder.
-
 2. Create a `~/.wakatime.cfg` file with contents:
 
         [settings]
